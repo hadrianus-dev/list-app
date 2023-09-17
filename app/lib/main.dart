@@ -1,10 +1,10 @@
-import 'package:ListApp/src/configuration/configuration_page.dart';
-import 'package:ListApp/src/home/home_page.dart';
+import 'package:ListApp/src/app_module.dart';
 import 'package:ListApp/src/shared/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ModularApp(module: AppModule(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,16 +13,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    Modular.setInitialRoute('/home/');
+    return MaterialApp.router(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       theme: lightTheme,
       darkTheme: darkTheme,
-      routes: {
-        '/': (context) => const HomePage(),
-        '/config': (context) => const ConfigurationPage(),
-      },
+      routerDelegate: Modular.routerDelegate,
+      routeInformationParser: Modular.routeInformationParser,
     );
   }
 }
