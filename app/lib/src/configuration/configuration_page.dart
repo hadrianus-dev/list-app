@@ -47,9 +47,7 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
                 'Sistema',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              onChanged: (mode) {
-                appStore.themeMode.value = mode!;
-              },
+              onChanged: appStore.changeThemeMode,
             ),
             RadioListTile<ThemeMode>(
               value: ThemeMode.light,
@@ -58,9 +56,7 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
                 'Claro',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              onChanged: (mode) {
-                appStore.themeMode.value = mode!;
-              },
+              onChanged: appStore.changeThemeMode,
             ),
             RadioListTile<ThemeMode>(
               value: ThemeMode.dark,
@@ -69,9 +65,7 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
                 'Escuro',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              onChanged: (mode) {
-                appStore.themeMode.value = mode!;
-              },
+              onChanged: appStore.changeThemeMode,
             ),
             const SizedBox(
               height: 20,
