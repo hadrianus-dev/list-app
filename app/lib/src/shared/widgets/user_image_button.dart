@@ -8,7 +8,7 @@ class UserImageButton extends StatelessWidget {
     return GestureDetector(
       child: CircleAvatar(
         backgroundColor: Theme.of(context).primaryColor,
-        foregroundColor: Colors.white,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         child: const Text('A'),
       ),
     );

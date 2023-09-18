@@ -8,7 +8,7 @@ ThemeData get lightTheme => ThemeData(
         centerTitle: true, backgroundColor: lightColorScheme.primaryContainer),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: lightColorScheme.primary,
-        foregroundColor: Colors.white),
+        foregroundColor: lightColorScheme.onPrimary),
     segmentedButtonTheme: _sgmentedButtonTheme);
 
 ThemeData get darkTheme => ThemeData(
