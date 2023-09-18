@@ -10,7 +10,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Modular.setInitialRoute('/home/');
-    final appStore = context.watch<AppStore>();
+    final appStore = context.watch<AppStore>(
+      (store) => store.themeMode,
+    );
     return MaterialApp.router(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
