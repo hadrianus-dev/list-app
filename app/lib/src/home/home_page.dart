@@ -25,6 +25,8 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
           children: [
             ListView.separated(
+              padding: const EdgeInsets.only(
+                  top: 50, left: 30, right: 30, bottom: 200),
               itemCount: 100,
               itemBuilder: (_, index) {
                 return const TaskCard();
