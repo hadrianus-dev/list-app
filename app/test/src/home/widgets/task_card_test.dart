@@ -1,7 +1,6 @@
 import 'package:ListApp/src/home/helpers/task_card_status.dart';
 import 'package:ListApp/src/home/widgets/task_card.dart';
 import 'package:ListApp/src/shared/service/realm/models/task_model.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:realm/realm.dart';
 
@@ -18,6 +17,11 @@ void main() {
     final progress = TaskCard(board: board).getProgress(tasks);
 
     expect(progress, 0.5);
+  });
+  test('Ensure getProgress return 0 when taks is empty array', () {
+    final tasks = <Task>[];
+    final progress = TaskCard(board: board).getProgress(tasks);
+    expect(progress, 0);
   });
   test('Ensure getStatus return TaskCardStatus.disabled when TaskBoard.enable is false', () {
     final board = TaskBoard(Uuid.v4(), 'Nova Lista', enable: false);

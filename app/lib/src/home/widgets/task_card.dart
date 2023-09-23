@@ -8,6 +8,7 @@ class TaskCard extends StatelessWidget {
   const TaskCard({super.key, required this.board});
 
   double getProgress(List<Task> tasks) {
+    if (tasks.isEmpty) return 0;
     final completes = tasks.where((task) => task.complete).length;
     return completes / tasks.length;
   }
@@ -33,17 +34,18 @@ class TaskCard extends StatelessWidget {
         return theme.colorScheme.primaryContainer;
       case TaskCardStatus.completed:
         return theme.colorScheme.tertiaryContainer;
-      default: 
+      default:
         return theme.colorScheme.errorContainer;
     }
   }
+
   Color getColor(TaskCardStatus status, ThemeData theme) {
     switch (status) {
       case TaskCardStatus.pending:
         return theme.colorScheme.primary;
       case TaskCardStatus.completed:
         return theme.colorScheme.tertiary;
-      default: 
+      default:
         return theme.colorScheme.error;
     }
   }
