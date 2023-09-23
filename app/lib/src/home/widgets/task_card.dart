@@ -1,6 +1,8 @@
 import 'package:ListApp/src/shared/service/realm/models/task_model.dart';
 import 'package:flutter/material.dart';
 
+import '../helpers/task_card_status.dart';
+
 class TaskCard extends StatelessWidget {
   final TaskBoard board;
   const TaskCard({super.key, required this.board});
@@ -10,10 +12,25 @@ class TaskCard extends StatelessWidget {
     return completes / tasks.length;
   }
 
+  String getProgressText(List<Task> tasks) {
+    final completes = tasks.where((task) => task.complete).length;
+    return '$completes/{$tasks.length}';
+  }
+
+  TaskCardStatus getStatus(TaskBoard board, double progress) {
+    if (!board.enable) {
+      return TaskCardStatus.disabled;
+    } else if (progress < 1.0) {
+      return TaskCardStatus.pending;
+    } else {
+      return TaskCardStatus.completed;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final double progress = getProgress(board.tasks);
-    const String progressText = '1/5';
+    final String progressText = getProgressText(board.tasks);
     final String title = board.title;
     const String statusText = 'Pendente';
     final Color backgroundColor = Colors.blueAccent.withOpacity(0.5);
