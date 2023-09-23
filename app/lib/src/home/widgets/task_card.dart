@@ -27,15 +27,39 @@ class TaskCard extends StatelessWidget {
     }
   }
 
+  Color getBackgroundColor(TaskCardStatus status, ThemeData theme) {
+    switch (status) {
+      case TaskCardStatus.pending:
+        return theme.colorScheme.primaryContainer;
+      case TaskCardStatus.completed:
+        return theme.colorScheme.tertiaryContainer;
+      default: 
+        return theme.colorScheme.errorContainer;
+    }
+  }
+  Color getColor(TaskCardStatus status, ThemeData theme) {
+    switch (status) {
+      case TaskCardStatus.pending:
+        return theme.colorScheme.primary;
+      case TaskCardStatus.completed:
+        return theme.colorScheme.tertiary;
+      default: 
+        return theme.colorScheme.error;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     final double progress = getProgress(board.tasks);
     final String progressText = getProgressText(board.tasks);
     final String title = board.title;
-    const String statusText = 'Pendente';
-    final Color backgroundColor = Colors.blueAccent.withOpacity(0.5);
-    const Color color = Colors.blueAccent;
-    const iconData = Icons.access_alarm;
+    final TaskCardStatus status = getStatus(board, progress);
+    final String statusText = status.text;
+    final Color backgroundColor = getBackgroundColor(status, theme);
+    final Color color = getColor(status, theme);
+    final iconData = status.icon;
 
     return Container(
       height: 130,
@@ -45,7 +69,7 @@ class TaskCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [Icon(iconData), Text(statusText)],
           ),
           const Spacer(),
