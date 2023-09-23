@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ListApp/src/shared/service/realm/models/task_model.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +6,11 @@ import '../helpers/task_card_status.dart';
 
 class TaskCard extends StatelessWidget {
   final TaskBoard board;
-  const TaskCard({super.key, required this.board});
+  final double? height;
+  const TaskCard({
+    Key? key,
+    required this.board, this.height,
+  }) : super(key: key);
 
   double getProgress(List<Task> tasks) {
     if (tasks.isEmpty) return 0;
@@ -64,7 +69,7 @@ class TaskCard extends StatelessWidget {
     final iconData = status.icon;
 
     return Container(
-      height: 130,
+      height: height,
       decoration: BoxDecoration(
           color: backgroundColor, borderRadius: BorderRadius.circular(25)),
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
@@ -72,14 +77,37 @@ class TaskCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: [Icon(iconData), Text(statusText)],
+            children: [
+              Icon(iconData, color: theme.iconTheme.color?.withOpacity(0.5)),
+              Text(
+                statusText,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: theme.textTheme.bodySmall?.color?.withOpacity(0.5),
+                ),
+              )
+            ],
           ),
           const Spacer(),
-          const Text('title'),
-          LinearProgressIndicator(
-            value: progress,
-            color: color,
+          Text(
+            'title',
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          const SizedBox(height: 8),
+          if (board.tasks.isNotEmpty)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                LinearProgressIndicator(
+                  value: progress,
+                  color: color,
+                ),
+              ],
+            ),
+          const SizedBox(height: 3),
           const Text('1/5')
         ],
       ),

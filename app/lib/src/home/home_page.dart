@@ -31,8 +31,13 @@ class _HomePageState extends State<HomePage> {
                   top: 50, left: 30, right: 30, bottom: 200),
               itemCount: 100,
               itemBuilder: (_, index) {
-                final board = TaskBoard(Uuid.v4(), 'Nova Lista de Tarefas 1');
-                return TaskCard(board: board);
+                final board = TaskBoard(Uuid.v4(), 'Nova Lista de Tarefas 1', tasks: [
+                  Task(Uuid.v4(), '', complete: true),
+                  Task(Uuid.v4(), '', complete: true),
+                  Task(Uuid.v4(), ''),
+                  Task(Uuid.v4(), '')
+                ]);
+                return TaskCard(board: board, height: 140);
               },
               separatorBuilder: (context, index) {
                 return const SizedBox(height: 10);
