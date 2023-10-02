@@ -9,7 +9,8 @@ class TaskCard extends StatelessWidget {
   final double? height;
   const TaskCard({
     Key? key,
-    required this.board, this.height,
+    required this.board,
+    this.height,
   }) : super(key: key);
 
   double getProgress(List<Task> tasks) {
