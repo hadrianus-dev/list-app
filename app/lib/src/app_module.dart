@@ -11,7 +11,7 @@ class AppModule extends Module {
   @override
   void binds(i) {
     i.addInstance<Realm>(Realm(config));
-    i.add<ConfigurationServiceContract>(ConfigurationService.new);
+    i.addSingleton<ConfigurationServiceContract>(ConfigurationService.new);
     i.addSingleton(AppStore.new);
   }
 
